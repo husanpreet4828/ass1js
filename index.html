@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Marks Calculator</title>
+</head>
+<body>
+  <script>
+
+    let numOfCourses = parseInt(prompt("How many courses did you finish?", "0"));
+
+    if (isNaN(numOfCourses) || numOfCourses <= 0) {
+      document.write("<p>Invalid Input!</p>");
+    } else {
+      //an empty array 
+      let courseMarks = [];
+
+      for (let i = 1; i <= numOfCourses; i++) {
+        let mark;
+        do {
+          mark = parseFloat(
+            prompt(`Enter your mark for course ${i} (out of 100):`, "0")
+          );
+          if (isNaN(mark) || mark < 0 || mark > 100) {
+            alert("Invalid input! Please enter a number between 0 and 100.");
+          }
+        } while (isNaN(mark) || mark < 0 || mark > 100);
+
+        courseMarks.push(mark);
+      }
+
+      //average
+      let total = courseMarks.reduce((sum, mark) => sum + mark, 0);
+      let average = total / numOfCourses;
+
+      //grade
+      let grade;
+      if (average >= 90) {
+        grade = "A+";
+      } else if (average >= 80) {
+        grade = "A";
+      } else if (average >= 70) {
+        grade = "B";
+      } else if (average >= 60) {
+        grade = "C";
+      } else if (average >= 50) {
+        grade = "D";
+      } else {
+        grade = "F";
+      }
+
+      //results
+      document.write("<p>Course Marks:</p>");
+      courseMarks.forEach((mark, index) => {
+        document.write(`<p>Course ${index + 1}: ${mark}</p>`);
+      });
+      document.write(`<p>Average Mark: ${average.toFixed(2)}</p>`);
+      document.write(`<p>Grade: ${grade}</p>`);
+    }
+  </script>
+</body>
+</html>
